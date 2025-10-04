@@ -11,6 +11,7 @@ import {
     Stack
 } from '@mui/material';
 import { ExpandMore, Share, ContentCopy } from '@mui/icons-material';
+import Tooltip from '@mui/material/Tooltip';
 
 const MantraCard = ({ mantra, highlighted = false }) => {
     const [showTransliteration, setShowTransliteration] = useState(false);
@@ -45,9 +46,15 @@ const MantraCard = ({ mantra, highlighted = false }) => {
                 {/* Header */}
                 <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                     <Box display="flex" alignItems="center" gap={1}>
-                        <Typography variant="subtitle2" color="primary">
-                            {mantra.reference}
-                        </Typography>
+                        <Tooltip
+                            title={`Maṇḍala ${mantra.mandala}, Sūkta ${mantra.sukta}, Mantra ${mantra.mantra}`}
+                            arrow
+                            placement="top"
+                        >
+                            <Typography variant="subtitle2" color="primary" sx={{ cursor: 'help' }}>
+                                {mantra.reference}
+                            </Typography>
+                        </Tooltip>
                         {mantra.deity && (
                             <Chip label={mantra.deity} size="small" color="secondary" />
                         )}
