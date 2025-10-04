@@ -56,8 +56,10 @@ const Explorer = ({ data }) => {
         setRandomMantra(data[randomIndex]);
     };
 
+    const filterStyle = { minWidth: 200 };
+
     return (
-        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 4 }}>
+        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 6 }}>
             {/* Search and Filters */}
             <Box sx={{ mb: 4 }}>
                 <TextField
@@ -65,16 +67,17 @@ const Explorer = ({ data }) => {
                     label="Search mantras"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    sx={{ mb: 2 }}
+                    sx={{ mb: 3 }}
                 />
                 <Grid container spacing={2} sx={{ mb: 2 }}>
-                    <Grid item xs={12} sm={3}>
-                        <FormControl fullWidth>
+                    <Grid item xs={12} sm={3} md={3}>
+                        <FormControl fullWidth sx={{ ...filterStyle }}>
                             <InputLabel>Deity</InputLabel>
                             <Select
                                 value={selectedDeity}
                                 onChange={(e) => setSelectedDeity(e.target.value)}
                                 label="Deity"
+                                sx={filterStyle}
                             >
                                 <MenuItem value="">All Deities</MenuItem>
                                 {deities.map(deity => (
@@ -83,8 +86,8 @@ const Explorer = ({ data }) => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <FormControl fullWidth>
+                    <Grid item xs={12} sm={3} md={3}>
+                        <FormControl fullWidth sx={{ ...filterStyle }}>
                             <InputLabel>Mandala</InputLabel>
                             <Select
                                 value={selectedMandala}
@@ -93,6 +96,7 @@ const Explorer = ({ data }) => {
                                     setSelectedSukta('');
                                 }}
                                 label="Mandala"
+                                sx={{ ...filterStyle }}
                             >
                                 <MenuItem value="">All Mandalas</MenuItem>
                                 {mandalas.map(mandala => (
@@ -101,13 +105,14 @@ const Explorer = ({ data }) => {
                             </Select>
                         </FormControl>
                     </Grid>
-                    <Grid item xs={12} sm={3}>
-                        <FormControl fullWidth disabled={!selectedMandala}>
+                    <Grid item xs={12} sm={3} md={3}>
+                        <FormControl fullWidth sx={{ ...filterStyle }} disabled={!selectedMandala}>
                             <InputLabel>Sukta</InputLabel>
                             <Select
                                 value={selectedSukta}
                                 onChange={e => setSelectedSukta(e.target.value)}
                                 label="Sukta"
+                                sx={{ ...filterStyle }}
                             >
                                 <MenuItem value="">All Suktas</MenuItem>
                                 {suktas.map(sukta => (
@@ -131,7 +136,7 @@ const Explorer = ({ data }) => {
                     <MantraCard mantra={randomMantra} highlighted />
                 </Box>
             )}
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h5" gutterBottom>
                 {searchTerm || selectedDeity || selectedMandala || selectedSukta ?
                     `Found ${filteredData.length} mantras` :
                     `Explore ${data.length} mantras`
