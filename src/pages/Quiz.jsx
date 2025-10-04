@@ -6,6 +6,7 @@ import { useRigvedaData } from '../hooks/useRigvedaData';
 import QuizHub from '../components/QuizHub';
 import DeityQuiz from '../components/quiz/DeityQuiz';
 import TranslationQuiz from '../components/quiz/TranslationQuiz';
+import MandalaQuiz from '../components/quiz/MandalaQuiz';
 
 const Quiz = () => {
     const { data, loading, error } = useRigvedaData();
@@ -49,6 +50,15 @@ const Quiz = () => {
     if (selectedMode === "translation") {
         return (
             <TranslationQuiz
+                data={data}
+                onExit={() => setSelectedMode(null)}
+            />
+        );
+    }
+
+    if (selectedMode === "mandala") {
+        return (
+            <MandalaQuiz
                 data={data}
                 onExit={() => setSelectedMode(null)}
             />
