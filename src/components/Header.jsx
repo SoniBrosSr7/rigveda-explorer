@@ -30,7 +30,7 @@ const Header = ({ currentPage, onPageChange }) => {
                             sx={{
                                 mx: 1,
                                 fontWeight: currentPage === page.key ? 'bold' : 'normal',
-                                textDecoration: currentPage === page.key ? 'underline' : 'none'
+                                textDecoration: currentPage === page.key ? 'none' : 'none'
                             }}
                         >
                             {page.label}

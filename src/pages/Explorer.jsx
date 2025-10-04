@@ -4,6 +4,7 @@ import {
     InputLabel, Select, MenuItem, Grid, Button, Pagination
 } from '@mui/material';
 import MantraCard from '../components/MantraCard';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const PAGE_SIZE = 20;
 
@@ -144,8 +145,14 @@ const Explorer = ({ data }) => {
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <Button fullWidth variant="outlined" onClick={getRandomMantra} sx={{ height: '56px' }}>
-                            🎲 Inspire Me!
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            onClick={getRandomMantra}
+                            startIcon={<VisibilityIcon />}
+                            sx={{ height: '56px', fontWeight: 'bold' }}
+                        >
+                            Reveal a Mantra
                         </Button>
                     </Grid>
                 </Grid>
@@ -154,7 +161,7 @@ const Explorer = ({ data }) => {
             {/* Random Mantra */}
             {randomMantra && (
                 <Box sx={{ mb: 4 }}>
-                    <Typography variant="h6" gutterBottom>✨ Random Inspiration</Typography>
+                    <Typography variant="h6" gutterBottom>✨ Revealed Mantra ✨</Typography>
                     <MantraCard mantra={randomMantra} highlighted />
                 </Box>
             )}
