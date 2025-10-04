@@ -3,7 +3,7 @@ import { Container, Typography, Box } from '@mui/material';
 
 const Visualizations = ({ data }) => {
     return (
-        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 4 }}>
+        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 6 }}>
             <Typography variant="h4" gutterBottom>
                 📊 Rigveda Insights
             </Typography>
