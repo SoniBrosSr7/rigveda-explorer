@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box, Button, Typography, Card, CardContent, Stack, Container
 } from '@mui/material';
@@ -163,13 +163,24 @@ const deityExplanations = {
 };
 
 const DeityQuiz = ({ data, onExit }) => {
+    const [sessionKey, setSessionKey] = useState(0);
+
     // Generate quiz questions for this session
-    const [quizItems] = useState(() => getRandomQuizItems(data));
+    const [quizItems, setQuizItems] = useState(() => getRandomQuizItems(data));
     const [index, setIndex] = useState(0);
     const [selected, setSelected] = useState(null);
     const [explanation, setExplanation] = useState(null);
     const [score, setScore] = useState(0);
     const [finished, setFinished] = useState(false);
+
+    useEffect(() => {
+        setQuizItems(getRandomQuizItems(data));
+        setIndex(0);
+        setSelected(null);
+        setExplanation(null);
+        setScore(0);
+        setFinished(false);
+    }, [sessionKey, data]);
 
     if (!quizItems.length) return <Box p={4}>Not enough mantras for the quiz!</Box>;
 
@@ -197,9 +208,7 @@ const DeityQuiz = ({ data, onExit }) => {
         else setFinished(true);
     };
 
-    const restartQuiz = () => {
-        window.location.reload(); // easiest way to re-shuffle for this version
-    };
+    const restartQuiz = () => setSessionKey(k => k + 1);
 
     return (
         <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: 6 }}>
