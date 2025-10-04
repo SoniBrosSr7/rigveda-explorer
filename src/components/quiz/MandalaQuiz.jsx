@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Typography, Box, Button, Card, CardContent, Stack } from '@mui/material';
 
 // Helper: Get N random questions with Mandala/Sukta/Mantra info
@@ -26,13 +26,26 @@ function getSuktaChoices(data, correctSukta, mandala) {
 }
 
 const MandalaQuiz = ({ data, onExit }) => {
-    const [quizItems] = useState(() => getRandomQuizItems(data));
+    const [sessionKey, setSessionKey] = useState(0);
+
+    const [quizItems, setQuizItems] = useState(() => getRandomQuizItems(data));
     const [index, setIndex] = useState(0);
     const [selectedMandala, setSelectedMandala] = useState(null);
     const [selectedSukta, setSelectedSukta] = useState(null);
     const [explanation, setExplanation] = useState(null);
     const [score, setScore] = useState(0);
     const [finished, setFinished] = useState(false);
+
+    // Add this!
+    useEffect(() => {
+        setQuizItems(getRandomQuizItems(data));
+        setIndex(0);
+        setSelectedMandala(null);
+        setSelectedSukta(null);
+        setExplanation(null);
+        setScore(0);
+        setFinished(false);
+    }, [sessionKey, data]);
 
     if (!quizItems.length) return <Box p={4}>Not enough mantras for the quiz!</Box>;
 
@@ -67,22 +80,22 @@ const MandalaQuiz = ({ data, onExit }) => {
         else setFinished(true);
     };
 
-    const restartQuiz = () => window.location.reload();
-
+    // Update your restart handler:
+    const restartQuiz = () => setSessionKey(k => k + 1);
     return (
-        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: 6 }}>
-            <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
+        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: { xs: 1, md: 6 } }}>
+            <Button variant="outlined" onClick={onExit} sx={{ mb: 1 }}>
                 Back to Quiz Menu
             </Button>
-            <Typography variant="h5" sx={{ mb: 2 }}>
+            <Typography variant="h5" sx={{ mb: 1 }}>
                 Mandala/Sukta Trivia Quiz
             </Typography>
-            <Typography color="text.secondary" sx={{ mb: 3 }}>
+            <Typography color="text.secondary" sx={{ mb: 1 }}>
                 Score: {score} / {quizItems.length}
             </Typography>
             {finished ? (
                 <Box textAlign="center" py={6}>
-                    <Typography variant="h5" sx={{ mb: 2 }}>
+                    <Typography variant="h5" sx={{ mb: 1 }}>
                         Quiz Finished!
                     </Typography>
                     <Typography color="success.main" variant="h6">
@@ -94,8 +107,16 @@ const MandalaQuiz = ({ data, onExit }) => {
                 </Box>
             ) : (
                 <Box>
-                    <Typography sx={{ mb: 2 }} fontWeight={500}>
-                        <b>Question {index + 1} of {quizItems.length}</b>
+                    <Typography
+                        variant="h6"
+                        color="primary"
+                        sx={{
+                            mb: 3,
+                            fontWeight: 600,
+                            letterSpacing: 1
+                        }}
+                    >
+                        Question {index + 1} of {quizItems.length}
                     </Typography>
                     <Card
                         variant="outlined"
@@ -113,13 +134,13 @@ const MandalaQuiz = ({ data, onExit }) => {
                             }
                         }}
                     >
-                        <CardContent sx={{ py: 2, px: 5 }}>
+                        <CardContent sx={{ py: 4, px: 5 }}>
                             <Typography
                                 variant="h4"
                                 sx={{
                                     fontFamily: 'Noto Sans Devanagari, serif',
-                                    mb: 1,
-                                    lineHeight: 1.25,
+                                    mb: 3,
+                                    lineHeight: 1.6,
                                     fontWeight: 500,
                                     textAlign: 'center',
                                     color: 'text.primary'
@@ -128,13 +149,13 @@ const MandalaQuiz = ({ data, onExit }) => {
                                 {cur.sanskrit}
                             </Typography>
                             <Typography
-                                variant="h5"
+                                variant="h6"
                                 color="text.secondary"
                                 sx={{
                                     mb: 2,
                                     fontStyle: "italic",
                                     textAlign: 'center',
-                                    lineHeight: 1.25
+                                    lineHeight: 1.5
                                 }}
                             >
                                 {cur.transliteration}
@@ -161,8 +182,16 @@ const MandalaQuiz = ({ data, onExit }) => {
                             </Box>
                         </CardContent>
                     </Card>
-                    <Typography variant="subtitle1" sx={{ mb: 0.5 }}>Which Mandala?</Typography>
-                    <Stack direction="row" spacing={2} sx={{ mt: 1, maxWidth: 600, mx: 'auto' }} justifyContent="center">
+
+                    <Typography variant="subtitle1" sx={{ mb: 1, textAlign: 'center' }}>
+                        Which Mandala?
+                    </Typography>
+                    <Stack
+                        direction="row"
+                        spacing={2}
+                        sx={{ mt: 1, maxWidth: 600, mx: 'auto' }}
+                        justifyContent="center"
+                    >
                         {mandalaChoices.map(num => {
                             const isCorrect = num === cur.mandala;
                             const showCorrect = selectedMandala && isCorrect;
@@ -172,7 +201,7 @@ const MandalaQuiz = ({ data, onExit }) => {
                                     key={num}
                                     variant={selectedMandala ? (showCorrect ? 'contained' : showWrong ? 'outlined' : 'text') : 'outlined'}
                                     color={selectedMandala ? (showCorrect ? 'success' : showWrong ? 'error' : 'primary') : 'primary'}
-                                    sx={{ minWidth: 80, fontWeight: 'bold', textTransform: 'none', borderRadius: 2 }}
+                                    sx={{ minWidth: 120, fontWeight: 'bold', textTransform: 'none', borderRadius: 2 }}
                                     disabled={selectedMandala !== null}
                                     onClick={() => handleMandalaSelect(num)}
                                 >
@@ -184,8 +213,15 @@ const MandalaQuiz = ({ data, onExit }) => {
 
                     {selectedMandala && (
                         <>
-                            <Typography variant="subtitle1" sx={{ mt: 3, mb: 0.5 }}>Which Sukta?</Typography>
-                            <Stack direction="row" spacing={2} sx={{ mt: 1, maxWidth: 600, mx: 'auto' }} justifyContent="center">
+                            <Typography variant="subtitle1" sx={{ mt: 3, mb: 1, textAlign: 'center' }}>
+                                Which Sukta?
+                            </Typography>
+                            <Stack
+                                direction="row"
+                                spacing={2}
+                                sx={{ mt: 1, maxWidth: 600, mx: 'auto' }}
+                                justifyContent="center"
+                            >
                                 {suktaChoices.map(num => {
                                     const isCorrect = num === cur.sukta;
                                     const showCorrect = selectedSukta && isCorrect;
@@ -195,7 +231,7 @@ const MandalaQuiz = ({ data, onExit }) => {
                                             key={num}
                                             variant={selectedSukta ? (showCorrect ? 'contained' : showWrong ? 'outlined' : 'text') : 'outlined'}
                                             color={selectedSukta ? (showCorrect ? 'success' : showWrong ? 'error' : 'primary') : 'primary'}
-                                            sx={{ minWidth: 80, fontWeight: 'bold', textTransform: 'none', borderRadius: 2 }}
+                                            sx={{ minWidth: 120, fontWeight: 'bold', textTransform: 'none', borderRadius: 2 }}
                                             disabled={selectedSukta !== null}
                                             onClick={() => handleSuktaSelect(num)}
                                         >
@@ -206,8 +242,9 @@ const MandalaQuiz = ({ data, onExit }) => {
                             </Stack>
                         </>
                     )}
+
                     {explanation && (
-                        <Box sx={{ my: { xs: 2, sm: 3 }, maxWidth: 600, mx: 'auto' }}>
+                        <Box sx={{ my: 4, maxWidth: 600, mx: 'auto' }}>
                             <Typography
                                 variant="h6"
                                 align="center"
@@ -216,7 +253,7 @@ const MandalaQuiz = ({ data, onExit }) => {
                             >
                                 {explanation}
                             </Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 1 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                 <Button
                                     variant="contained"
                                     size="large"
