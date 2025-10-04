@@ -1,123 +1,57 @@
+// pages/Quiz.jsx
 import React, { useState } from 'react';
-import {
-    Container,
-    Typography,
-    Box,
-    Grid,
-    Card,
-    CardContent,
-    Button
-} from '@mui/material';
+import { Container, CircularProgress, Typography, Box } from '@mui/material';
 
-// Quiz mode options with descriptions
-const QUIZ_MODES = [
-    {
-        id: 'deity',
-        title: 'Deity Identification',
-        description: 'Identify the deity addressed by the mantra.',
-    },
-    {
-        id: 'translation',
-        title: 'Translation Matching',
-        description: 'Match Sanskrit mantras to their English translations.',
-    },
-    {
-        id: 'mandala',
-        title: 'Mandala/Sukta Trivia',
-        description: 'Guess the mandala or sukta to which a mantra belongs.',
-    },
-    {
-        id: 'fillblank',
-        title: 'Fill-in-the-Blank',
-        description: 'Choose the missing word or deity in a translation.',
-    },
-    {
-        id: 'mixed',
-        title: 'Mixed Quiz',
-        description: 'Challenge yourself with questions from all types!',
-    },
-];
+import { useRigvedaData } from '../hooks/useRigvedaData';
+import QuizHub from '../components/QuizHub';
+import DeityQuiz from '../components/quiz/DeityQuiz';
 
-const QuizModeSelect = ({ onSelect }) => (
-    <Box sx={{ py: 0, px: { xs: 0, sm: 4, md: 8 } }}>
-        <Typography variant="h4" gutterBottom align="center">
-            🧠 Choose Your Rigveda Quiz Mode
-        </Typography>
-        <Grid container spacing={6} justifyContent="center">
-            {QUIZ_MODES.map(mode => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={mode.id}>
-                    <Card
-                        variant="outlined"
-                        sx={{
-                            height: '100%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between',
-                            boxShadow: 2,
-                            borderRadius: 3,
-                            minHeight: 175,
-                            transition: 'transform 0.1s',
-                            '&:hover': { transform: 'translateY(-4px) scale(1.03)', boxShadow: 6 },
-                        }}
-                    >
-                        <CardContent sx={{ flexGrow: 1 }}>
-                            <Typography variant="h6" gutterBottom>
-                                {mode.title}
-                            </Typography>
-                            <Typography color="text.secondary">
-                                {mode.description}
-                            </Typography>
-                        </CardContent>
-                        <Box sx={{ p: 2, pt: 0 }}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                size="large"
-                                onClick={() => onSelect(mode.id)}
-                                sx={{ borderRadius: 2, fontWeight: 700 }}
-                            >
-                                Start Quiz
-                            </Button>
-                        </Box>
-                    </Card>
-                </Grid>
-            ))}
-        </Grid>
-    </Box>
-);
-
-const QuizHub = ({ data }) => {
+const Quiz = () => {
+    const { data, loading, error } = useRigvedaData();
     const [selectedMode, setSelectedMode] = useState(null);
 
-    // Placeholder: when you select a mode, replace below with actual quiz component for that mode
-    if (selectedMode) {
+    if (loading) {
         return (
             <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 0 }}>
-                <Box sx={{ textAlign: 'center' }}>
-                    <Typography variant="h5" gutterBottom>
-                        Coming Soon!
+                <Box sx={{ py: 0, px: { xs: 0, sm: 4, md: 8 } }}>
+                    <Typography variant="h4" gutterBottom align="center">
+                        🧠 Loading Quiz Modes...
                     </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
-                        The <b>{QUIZ_MODES.find(m => m.id === selectedMode).title}</b> quiz is under development.
-                    </Typography>
-                    <Button
-                        variant="outlined"
-                        size="large"
-                        onClick={() => setSelectedMode(null)}
-                        sx={{ mt: 2 }}
-                    >
-                        Back to Quiz Menu
-                    </Button>
+                    <Box sx={{ textAlign: 'center', py: 8 }}>
+                        <CircularProgress />
+                    </Box>
                 </Box>
             </Container>
         );
     }
 
+    if (error) {
+        return (
+            <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 10 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                    <Typography color="error" variant="h6">Error: {error}</Typography>
+                </Box>
+            </Container>
+        );
+    }
+
+    // Render appropriate quiz mode
+    if (selectedMode === "deity") {
+        return (
+            <DeityQuiz
+                data={data}
+                onExit={() => setSelectedMode(null)}
+            />
+        );
+    }
+
+    // Default: Show QuizHub (mode selection)
     return (
-        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 0 }}>
-            <QuizModeSelect onSelect={setSelectedMode} />
-        </Container>
+        <QuizHub
+            data={data}
+            onSelectMode={setSelectedMode}
+        />
     );
 };
 
-export default QuizHub;
+export default Quiz;
