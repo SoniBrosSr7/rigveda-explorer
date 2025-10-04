@@ -7,6 +7,11 @@ import MantraCard from '../components/MantraCard';
 
 const PAGE_SIZE = 20;
 
+function removeDiacritics(str) {
+    if (!str) return '';
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
 const Explorer = ({ data }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedDeity, setSelectedDeity] = useState('');
@@ -28,16 +33,33 @@ const Explorer = ({ data }) => {
             : []
         , [data, selectedMandala]);
 
-    // Filtering logic
+    /**
+     * It will search for any part of transliteration and with, without, or partial diacritics
+     */
     const filteredData = useMemo(() => {
+        const normalizedSearch = removeDiacritics(searchTerm.toLowerCase());
+
         return data.filter(item => {
-            const matchesSearch = !searchTerm ||
-                item.sanskrit?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.transliteration?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.translation?.toLowerCase().includes(searchTerm.toLowerCase());
+            // Check in Sanskrit as-is
+            const matchesSanskrit =
+                item.sanskrit && item.sanskrit.toLowerCase().includes(searchTerm.toLowerCase());
+
+            // Check in transliteration, stripped of diacritics
+            const translit = removeDiacritics(item.transliteration || '').toLowerCase();
+            const matchesTranslit =
+                translit.includes(normalizedSearch);
+
+            // Check translation as usual
+            const matchesTranslation =
+                item.translation && item.translation.toLowerCase().includes(searchTerm.toLowerCase());
+
+            const matchesSearch =
+                !searchTerm || matchesSanskrit || matchesTranslit || matchesTranslation;
+
             const matchesDeity = !selectedDeity || item.deity === selectedDeity;
             const matchesMandala = !selectedMandala || item.mandala === parseInt(selectedMandala);
             const matchesSukta = !selectedSukta || item.sukta === parseInt(selectedSukta);
+
             return matchesSearch && matchesDeity && matchesMandala && matchesSukta;
         });
     }, [data, searchTerm, selectedDeity, selectedMandala, selectedSukta]);
