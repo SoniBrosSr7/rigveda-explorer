@@ -140,20 +140,20 @@ const MixedQuiz = ({ data, onExit }) => {
                 <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
                     Back to Quiz Menu
                 </Button>
-                <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>Mixed Quiz</Typography>
-                <Typography color="text.secondary" sx={{ mb: 3 }}>
+                <Typography variant="h5" sx={{ mb: 1, textAlign: 'center' }}>Mixed Quiz</Typography>
+                <Typography color="text.secondary" sx={{ mb: 1 }}>
                     Score: {score} / {quizItems.length}
                 </Typography>
                 <Typography sx={{ mb: 2 }}>
                     <b>Question {index + 1} of {quizItems.length}</b>
                 </Typography>
                 <Card variant="outlined" sx={{ mb: 3, mx: "auto", borderRadius: 4, boxShadow: 4, maxWidth: 800, border: "2px solid", borderColor: "primary.main" }}>
-                    <CardContent sx={{ py: 4, px: 5 }}>
-                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 2 }}>
+                    <CardContent sx={{ py: 3, px: 3 }}>
+                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 1 }}>
                             Which deity is addressed by this mantra?
                         </Typography>
-                        <Typography variant="h4" sx={{ fontFamily: 'Noto Sans Devanagari, serif', mb: 2, textAlign: "center" }}>{cur.sanskrit}</Typography>
-                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 2 }}>{cur.transliteration}</Typography>
+                        <Typography variant="h4" sx={{ fontFamily: 'Noto Sans Devanagari, serif', mb: 1, textAlign: "center" }}>{cur.sanskrit}</Typography>
+                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 1.5 }}>{cur.transliteration}</Typography>
                         <Typography color="text.secondary" variant="caption" sx={{ textAlign: "center", display: 'block', mt: 1 }}>
                             Mandala {cur.mandala} • Sukta {cur.sukta} • Mantra {cur.mantra}
                         </Typography>
@@ -229,12 +229,12 @@ const MixedQuiz = ({ data, onExit }) => {
                     <b>Question {index + 1} of {quizItems.length}</b>
                 </Typography>
                 <Card variant="outlined" sx={{ mb: 3, mx: "auto", borderRadius: 4, boxShadow: 4, maxWidth: 800, border: "2px solid", borderColor: "primary.main" }}>
-                    <CardContent sx={{ py: 4, px: 5 }}>
-                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 2 }}>
+                    <CardContent sx={{ py: 3, px: 3 }}>
+                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 1 }}>
                             Match the correct English translation to this mantra.
                         </Typography>
-                        <Typography variant="h4" sx={{ fontFamily: 'Noto Sans Devanagari, serif', mb: 2, textAlign: "center" }}>{cur.sanskrit}</Typography>
-                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 2 }}>{cur.transliteration}</Typography>
+                        <Typography variant="h4" sx={{ fontFamily: 'Noto Sans Devanagari, serif', mb: 1, textAlign: "center" }}>{cur.sanskrit}</Typography>
+                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 1.5 }}>{cur.transliteration}</Typography>
                         <Typography color="text.secondary" variant="caption" sx={{ textAlign: "center", display: 'block', mt: 1 }}>
                             Mandala {cur.mandala} • Sukta {cur.sukta} • Mantra {cur.mantra}
                         </Typography>
@@ -300,11 +300,11 @@ const MixedQuiz = ({ data, onExit }) => {
         const suktaChoices = getSuktaChoices(data, cur.sukta, cur.mandala);
         return (
             <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: 6 }}>
-                <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
+                <Button variant="outlined" onClick={onExit} sx={{ mb: 1 }}>
                     Back to Quiz Menu
                 </Button>
                 <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>Mixed Quiz</Typography>
-                <Typography color="text.secondary" sx={{ mb: 3 }}>
+                <Typography color="text.secondary" sx={{ mb: 1 }}>
                     Score: {score} / {quizItems.length}
                 </Typography>
                 <Typography sx={{ mb: 2 }}>
@@ -411,24 +411,27 @@ const MixedQuiz = ({ data, onExit }) => {
     if (cur.type === "fillblank") {
         const choices = getDeityChoices(data, cur.deity);
         return (
-            <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 0 }}>
-                <Button variant="outlined" onClick={onExit} sx={{ mb: 3, ml: 6 }}>
+            <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: 6 }}>
+                <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
                     Back to Quiz Menu
                 </Button>
                 <Typography variant="h5" sx={{ mb: 2, textAlign: 'center' }}>Mixed Quiz</Typography>
-                <Typography color="text.secondary" sx={{ mb: 3, textAlign: 'center' }}>
-                    Score: {score} / {quizItems.length} &nbsp; • &nbsp; Question {index + 1} of {quizItems.length}
+                <Typography color="text.secondary" sx={{ mb: 1 }}>
+                    Score: {score} / {quizItems.length}
+                </Typography>
+                <Typography sx={{ mb: 2 }}>
+                    <b>Question {index + 1} of {quizItems.length}</b>
                 </Typography>
                 <Card variant="outlined" sx={{ mb: 3, mx: "auto", borderRadius: 4, boxShadow: 4, maxWidth: 800, border: "2px solid", borderColor: "primary.main" }}>
                     <CardContent sx={{ py: 4, px: 5 }}>
-                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 2 }}>
+                        <Typography variant="body2" color="info.main" sx={{ fontWeight: 700, textAlign: "center", mb: 1 }}>
                             Fill in the missing word or deity in the translation!
                         </Typography>
-                        <Typography variant="h5" sx={{ textAlign: "center", mb: 2 }}>
+                        <Typography variant="h5" sx={{ textAlign: "center", mb: 1 }}>
                             {cur.blankTranslation}
                         </Typography>
-                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 2 }}>{cur.transliteration}</Typography>
-                        <Typography color="text.secondary" variant="caption" sx={{ textAlign: "center", display: 'block', mt: 1 }}>
+                        <Typography variant="h6" color="text.secondary" sx={{ fontStyle: "italic", textAlign: "center", mb: 1 }}>{cur.transliteration}</Typography>
+                        <Typography color="text.secondary" variant="caption" sx={{ textAlign: "center", display: 'block', mt: 1.5 }}>
                             Mandala {cur.mandala} • Sukta {cur.sukta} • Mantra {cur.mantra}
                         </Typography>
                     </CardContent>
