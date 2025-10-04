@@ -5,6 +5,7 @@ import { Container, CircularProgress, Typography, Box } from '@mui/material';
 import { useRigvedaData } from '../hooks/useRigvedaData';
 import QuizHub from '../components/QuizHub';
 import DeityQuiz from '../components/quiz/DeityQuiz';
+import TranslationQuiz from '../components/quiz/TranslationQuiz';
 
 const Quiz = () => {
     const { data, loading, error } = useRigvedaData();
@@ -39,6 +40,15 @@ const Quiz = () => {
     if (selectedMode === "deity") {
         return (
             <DeityQuiz
+                data={data}
+                onExit={() => setSelectedMode(null)}
+            />
+        );
+    }
+
+    if (selectedMode === "translation") {
+        return (
+            <TranslationQuiz
                 data={data}
                 onExit={() => setSelectedMode(null)}
             />

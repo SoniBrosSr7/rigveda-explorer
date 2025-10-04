@@ -202,7 +202,7 @@ const DeityQuiz = ({ data, onExit }) => {
     };
 
     return (
-        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 6, px: 6 }}>
+        <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: 6 }}>
             <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
                 Back to Quiz Menu
             </Button>
