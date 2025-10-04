@@ -58,7 +58,7 @@ const TranslationQuiz = ({ data, onExit }) => {
             <Button variant="outlined" onClick={onExit} sx={{ mb: 1 }}>
                 Back to Quiz Menu
             </Button>
-            <Typography variant="h5" sx={{ mb: 0 }}>
+            <Typography variant="h5" sx={{ mb: 0 }} textAlign={'center'}>
                 Translation Matching Quiz
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 1 }}>

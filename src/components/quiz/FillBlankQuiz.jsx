@@ -75,7 +75,7 @@ const FillBlankQuiz = ({ data, onExit }) => {
             <Button variant="outlined" onClick={onExit} sx={{ mb: 1 }}>
                 Back to Quiz Menu
             </Button>
-            <Typography variant="h5" sx={{ mb: 1 }}>
+            <Typography variant="h5" sx={{ mb: 1 }} textAlign={'center'}>
                 Fill in the Blank Quiz
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 1 }}>

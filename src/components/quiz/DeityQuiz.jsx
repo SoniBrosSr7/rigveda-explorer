@@ -215,7 +215,7 @@ const DeityQuiz = ({ data, onExit }) => {
             <Button variant="outlined" onClick={onExit} sx={{ mb: 3 }}>
                 Back to Quiz Menu
             </Button>
-            <Typography variant="h5" sx={{ mb: 2 }}>
+            <Typography variant="h5" sx={{ mb: 2 }} textAlign={'center'}>
                 Deity Identification Quiz
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 3 }}>

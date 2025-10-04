@@ -80,14 +80,14 @@ const MandalaQuiz = ({ data, onExit }) => {
         else setFinished(true);
     };
 
-    // Update your restart handler:
     const restartQuiz = () => setSessionKey(k => k + 1);
+
     return (
         <Container maxWidth={false} disableGutters sx={{ width: '100vw', py: 3, px: { xs: 1, md: 6 } }}>
             <Button variant="outlined" onClick={onExit} sx={{ mb: 1 }}>
                 Back to Quiz Menu
             </Button>
-            <Typography variant="h5" sx={{ mb: 1 }}>
+            <Typography variant="h5" sx={{ mb: 1 }} textAlign={'center'}>
                 Mandala/Sukta Trivia Quiz
             </Typography>
             <Typography color="text.secondary" sx={{ mb: 1 }}>
