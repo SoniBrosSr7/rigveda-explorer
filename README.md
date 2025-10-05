@@ -6,7 +6,7 @@ A fast, modern React + Vite app for learning and testing knowledge of Rigvedic m
 
 ## Features
 
-- **Rigveda Exploration Made Easy** - Search by mantra using Sanskrit text, transliteration (e.g., शान्तिः as "shāntiḥ"), or English translation. Multiple search methods supported for accessibility.
+- **Rigveda Exploration Made Easy** - Search by mantra using Sanskrit text, transliteration (e.g., शान्तिः as "shāntiḥ") also supports simplified version of transliteration (e.g. yajnasya instead of yajñasya  ), or English translation. Multiple search methods supported for accessibility.
 - **Rigveda Filtering** - Filter mantras based on Mandala, Sukta, deity, meter, or specific themes to find exactly what you're studying.
 - **Multiple Quiz Modes** - Test your knowledge with Deity Identification, Translation Matching, Mandala/Sukta Trivia, Fill-in-the-Blank, and Mixed Quiz modes.
 - **Instant Feedback** - Colorful, interactive UI with real-time score tracking and immediate answer validation.
