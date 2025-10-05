@@ -17,10 +17,17 @@ const Header = ({ currentPage, onPageChange }) => {
     return (
         <AppBar position="static" elevation={0}>
             <Toolbar>
-                <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-                    🕉️ Rigveda Explorer
+                <Typography
+                    variant="h6"
+                    sx={{ flexGrow: 1, fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 1 }}
+                >
+                    <img
+                        src="/rigveda-logo.png"
+                        alt="Rigveda Explorer Logo"
+                        style={{ height: 50, width: 50, marginRight: 8, verticalAlign: 'middle' }}
+                    />
+                    Rigveda Explorer
                 </Typography>
-
                 <Box>
                     {pages.map((page) => (
                         <Button
