@@ -1,16 +1,43 @@
-# React + Vite
+# Rigveda Interactive Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fast, modern React + Vite app for learning and testing knowledge of Rigvedic mantras and deities, with quiz modes including Deity Identification, Translation Matching, Mandala/Sukta Trivia, Fill-in-the-Blank, and Mixed Quiz.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Multiple Quiz Modes:** Deity, Translation, Mandala/Sukta, Fill-in-the-Blank, and Mixed.
+- **Instant Feedback:** Colorful, interactive UI with score tracking.
+- **Audio Support:** Some questions feature audio pronunciation/playback (BSD-licensed).
+- **Responsive & Fast:** Built with React, Vite, and MUI for smooth user experience.
 
-## React Compiler
+## Usage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Clone or download this repo
+- Install dependencies:
 
-## Expanding the ESLint configuration
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Start the development server:
+
+npm run dev
+
+- Open `http://localhost:5173` in your browser.
+
+## Attribution
+
+Some audio files are copyright (c) 2024, AASI Archive  
+Licensed under the [BSD 2-Clause License](./public/audio/LICENSE)  
+Redistribution and use permitted with license and attribution.
+
+## License
+
+This project is licensed under the MIT License (see [LICENSE](./LICENSE) for details).  
+See also `/public/audio/LICENSE` for audio file license and attribution.
+
+## Credits
+
+- Built using [React](https://react.dev/), [Vite](https://vitejs.dev/), and [Material UI](https://mui.com/).
+- Based on Sanskrit texts and metadata attributed in the content/data files.
+
+---
+
+**Feel free to contribute, fork, or adapt for your learning community!**  
