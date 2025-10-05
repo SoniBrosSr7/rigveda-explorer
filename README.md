@@ -6,8 +6,11 @@ A fast, modern React + Vite app for learning and testing knowledge of Rigvedic m
 
 - **Multiple Quiz Modes:** Deity, Translation, Mandala/Sukta, Fill-in-the-Blank, and Mixed.
 - **Instant Feedback:** Colorful, interactive UI with score tracking.
-- **Audio Support:** Some questions feature audio pronunciation/playback (BSD-licensed).
 - **Responsive & Fast:** Built with React, Vite, and MUI for smooth user experience.
+
+## Features likely to be added in future
+- **Audio Support:** Featuring audio pronunciation/playback with along with the Mantras (BSD-licensed).
+- **AI Integration:** To explain a Mantra and context of it.
 
 ## Usage
 
@@ -21,12 +24,6 @@ npm install
 npm run dev
 
 - Open `http://localhost:5173` in your browser.
-
-## Attribution
-
-Some audio files are copyright (c) 2024, AASI Archive  
-Licensed under the [BSD 2-Clause License](./public/audio/LICENSE)  
-Redistribution and use permitted with license and attribution.
 
 ## License
 
